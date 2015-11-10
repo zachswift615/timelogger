@@ -1,10 +1,10 @@
 import sqlite3, datetime, textwrap
 
-#conn = sqlite3.Connection('timelog')
-#curs = conn.cursor()
-
-#TABLEDEF = 'create table timelog (timestamp datetime, description text);'
-#curs.execute(TABLEDEF)
+# conn = sqlite3.Connection('timelog')
+# curs = conn.cursor()
+#
+# TABLEDEF = 'create table timelog (timestamp text, description text);'
+# curs.execute(TABLEDEF)
 
 def new_entry(desc, ts=None):
     if not ts:
@@ -23,7 +23,7 @@ def new_entry(desc, ts=None):
 def get_entries(range=None):
     conn = sqlite3.Connection('timelog')
     curs = conn.cursor()
-    query = 'SELECT * FROM timelog ORDER BY date(timestamp) ASC'
+    query = 'SELECT * FROM timelog ORDER BY datetime(timestamp) DESC;'
     myres = curs.execute(query)
     myres = myres.fetchall()
     conn.commit()
@@ -32,7 +32,7 @@ def get_entries(range=None):
 
 if __name__ == '__main__':
     while True:
-        choice = input('new entry: [n], list entries: [l]: ')
+        choice = input('new entry: [n], list entries: [l], exit: [x]: ')
         if choice.lower() == 'n':
             desc = input('enter description: ')
             ts = input('enter time (leave blank for now): ')
@@ -56,4 +56,6 @@ if __name__ == '__main__':
                 for line in desc_lines:
                     print(line)
                 print('\n')
+        elif choice.lower() == 'x':
+            exit()
 
