@@ -23,7 +23,7 @@ def new_entry(desc, ts=None):
 def get_entries(range=None):
     conn = sqlite3.Connection('timelog')
     curs = conn.cursor()
-    query = 'SELECT * FROM timelog ORDER BY datetime(timestamp) DESC;'
+    query = 'SELECT * FROM timelog where date(timestamp)=date("now", "-1 day") ORDER BY datetime(timestamp) DESC;'
     myres = curs.execute(query)
     myres = myres.fetchall()
     conn.commit()
