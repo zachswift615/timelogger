@@ -9,19 +9,19 @@ import sqlite3, datetime, textwrap
 # conn.close()
 #
 #
-# conn = sqlite3.Connection('timelog')
-# curs = conn.cursor()
-# TABLEDEF = '''
-#     create table timelog
-#     (
-#     id integer primary key autoincrement,
-#     timestamp text,
-#     description text
-#     );
-#     '''
-# curs.execute(TABLEDEF)
-# conn.commit()
-# conn.close()
+conn = sqlite3.Connection('timelog')
+curs = conn.cursor()
+TABLEDEF = '''
+    create table if not exists timelog
+    (
+    id integer primary key autoincrement,
+    timestamp text,
+    description text
+    );
+    '''
+curs.execute(TABLEDEF)
+conn.commit()
+conn.close()
 
 def new_entry(desc, ts=None):
     if not ts:
