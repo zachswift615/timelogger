@@ -107,7 +107,7 @@ if __name__ == '__main__':
         print('\n' + '*' * 79 + '\n')
         if choice.lower() == 'c':
             desc = input('enter description: ')
-            ts = input('enter time (press enter to use now): ')
+            ts = input('enter time YYYY-MM-DDTHH:MM:SS.MS (press enter to use now): ')
             if not ts:
                 resp = new_entry(desc)
             else:
