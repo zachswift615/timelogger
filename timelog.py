@@ -84,22 +84,35 @@ if __name__ == '__main__':
     time_format = '%I:%M:%S %p'
     datetime_format = '%b %d, %Y %I:%M %p'
     parse_format = '%Y-%m-%dT%H:%M:%S.%f'
+    print('=' * 79)
+    print('\n')
+    print('{0:^79}'.format("TIME LOGGER"))
+    print('\n')
+    print('-' * 79)
+    # print('\n')
+    print('{0:^79}'.format('Keep track of your day with short descriptive entries'))
+
+
     while True:
         print('\n' + '*' * 79 + '\n')
-        choice_format = '{0:<15}{1:<15}{2:<15}{3:<15}'
-        prompt = choice_format.format('create', 'read', 'delete', 'exit')
-        prompt += '\n' + choice_format.format('[c]', '[r]', '[d]', '[x]')
-        prompt += '\n' + '>>'
-        choice = input(prompt)
+        choice_format = '{0:^15}{1:^15}{2:^15}{3:^15}'
+        prompt_names = choice_format.format('create', 'read', 'delete', 'exit')
+        prompt_names = '{0:^79}'.format(prompt_names)
+        prompt_short = choice_format.format('[c]', '[r]', '[d]', '[x]')
+        prompt_short = '{0:^79}'.format(prompt_short)
+        # prompt += '\n' + '>>'
+        print(prompt_names)
+        print(prompt_short)
+        choice = input('>> ')
         print('\n' + '*' * 79 + '\n')
         if choice.lower() == 'c':
             desc = input('enter description: ')
-            ts = input('enter time (leave blank for now): ')
+            ts = input('enter time (press enter to use now): ')
             if not ts:
                 resp = new_entry(desc)
             else:
                 resp = new_entry(desc, ts)
-            print(resp)
+            # print(resp)
             if resp:
                 print('entry successfully added')
             else:
@@ -109,7 +122,7 @@ if __name__ == '__main__':
             if user_choice == 'id':
                 entry_id = input('entry ID: ')
                 res = read_entry(entry_id)
-                print(res)
+                # print(res)
                 for entry in res:
                     id, ts, desc = entry
                     desc_lines = textwrap.wrap(desc)
@@ -126,7 +139,7 @@ if __name__ == '__main__':
                     print('\n')
 
             elif user_choice == 'day':
-                day_string = input('select day (leave blank for today): ')
+                day_string = input('select day YYYY-MM-DD (leave blank for today):\n>>')
 
                 if day_string:
                     res = get_entries_by_day(day_string)
@@ -151,7 +164,7 @@ if __name__ == '__main__':
         elif choice.lower() == 'd':
             entry_id = input('entry ID: ')
             res = delete_entry(entry_id)
-            print(res)
+            # print(res)
 
 
         elif choice.lower() == 'x':
