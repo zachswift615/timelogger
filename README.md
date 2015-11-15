@@ -1,3 +1,3 @@
-# timelogger
+### Time Logger
 
-*run it with python3
+* run it with python3
