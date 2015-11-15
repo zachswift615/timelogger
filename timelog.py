@@ -118,7 +118,7 @@ if __name__ == '__main__':
             else:
                 print(resp)
         elif choice.lower() == 'r':
-            user_choice = input("by [day], or by [id]?\n>> ")
+            user_choice = input("by day [enter], or by [id]?\n>> ")
             if user_choice == 'id':
                 entry_id = input('entry ID: ')
                 res = read_entry(entry_id)
@@ -138,8 +138,8 @@ if __name__ == '__main__':
                         print(line)
                     print('\n')
 
-            elif user_choice == 'day':
-                day_string = input('select day YYYY-MM-DD (leave blank for today):\n>>')
+            elif not user_choice:
+                day_string = input('select day YYYY-MM-DD ([enter] for today):\n>>')
 
                 if day_string:
                     res = get_entries_by_day(day_string)
